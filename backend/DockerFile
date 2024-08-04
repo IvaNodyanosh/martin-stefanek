@@ -1,13 +1,19 @@
-FROM node:alpine as build
+FROM node:14
 
+# Встановлення робочої директорії
 WORKDIR /app
 
+# Копіювання package.json та package-lock.json
 COPY package*.json ./
 
-RUN npm install --production
+# Встановлення залежностей
+RUN npm install
 
+# Копіювання всіх файлів до робочої директорії
 COPY . .
 
+# Відкриття порту
 EXPOSE 3100
 
-CMD ["npm", "start"]
+# Запуск програми
+CMD ["node", "server.js"]
